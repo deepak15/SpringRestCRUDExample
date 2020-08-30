@@ -7,11 +7,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dpk.application.model.Book;
 import com.dpk.application.repository.BookRepository;
 
 @Service
+@Transactional
 public class BookService {
 	
 	Logger logger = LogManager.getLogger(BookService.class);
@@ -19,9 +21,17 @@ public class BookService {
 	@Autowired
 	private BookRepository bookRepository;
 	
+	@Autowired
+	private SequenceGeneratorService sequenceGeneratorService;
+	
+	
 	public Book add(Book  book) {
 		logger.debug("In add.." + book);
+		long seq = sequenceGeneratorService.generateSequence(Book.SEQUENCE_NAME);
+		
+		book.setId(seq);
 		bookRepository.save(book);
+		
 		return book;
 	}
 

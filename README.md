@@ -33,3 +33,7 @@ HTTP Method: GET http: //localhost:8080/rest/rest/book/1
 HTTP Method: GET http: //localhost:8080/rest/book/all
 
 HTTP Method: DELETE http: //localhost:8080/rest/book/delete/1
+
+
+Records can be added using UI. After running spring boot application.
+Open http: //localhost:8080 in browser. 
